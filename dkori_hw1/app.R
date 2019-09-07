@@ -65,7 +65,7 @@ ui <- fluidPage(
     
     # Show a plot of the generated distribution
     mainPanel(
-      downloadButton("download_subset","Get this data"),
+      downloadButton("downloadData","Get this data"),
       plotOutput(outputId = "line_plot"),
       plotOutput("bar_plot"),
       plotOutput("donut"),
@@ -173,10 +173,14 @@ server <- function(input, output) {
   })
   
   #data for download button
-  output$downloadData<-reactive({
-    downloadHandler(filename="gun_violence_subset.csv",guns_subset2())
+  #wrap in observer to allow reactive
+  observe(
+    output$downloadData<-downloadHandler(filename="gun_violence_subset.csv",
+                    content=function(file){
+                      write.csv(guns_subset2(),file)
+                      })
+    )
     
-  })
 }
 # Run the application 
 shinyApp(ui = ui, server = server)
