@@ -6,6 +6,7 @@
 #
 #    http://shiny.rstudio.com/
 #
+library(DT)
 library(tidyr)
 library(shiny)
 library(readr)
@@ -14,7 +15,6 @@ library(ggplot2)
 library(httr)
 library(RCurl)
 library(scales)
-library(DT)
 
 remote_data<-getURL('https://raw.githubusercontent.com/fivethirtyeight/guns-data/master/full_data.csv')
 guns<-read_csv(remote_data)%>%
@@ -71,7 +71,7 @@ ui <- fluidPage(
         plotOutput(outputId = "line_plot"),
         plotOutput("bar_plot"),
         plotOutput("donut"),
-        dataTableOutput(outputId="datatable")
+        DT::dataTableOutput(outputId="datatab")
         
          
       )
@@ -103,12 +103,13 @@ server <- function(input, output) {
      names(temp)<-c("datetime","age", "series_choice")
      temp
    })
-   
-   output$datatable=renderDataTable(
+
+   output$datatab=DT::renderDataTable(
      DT::datatable(guns_subset2()%>%
                  group_by(series_choice)%>%
                  count(name="value")%>%
                  mutate(value=comma(value)),rownames=FALSE)
+     #DT::datatable(data.frame(x="foo",y="bar"))
    )
    output$line_plot <- renderPlot({
      
