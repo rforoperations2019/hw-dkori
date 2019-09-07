@@ -65,11 +65,12 @@ ui <- fluidPage(
     
     # Show a plot of the generated distribution
     mainPanel(
+      dataTableOutput(outputId="datatable"),
       downloadButton("downloadData","Get this data"),
       plotOutput(outputId = "line_plot"),
       plotOutput("bar_plot"),
-      plotOutput("donut"),
-      dataTableOutput(outputId="datatable")
+      plotOutput("donut")
+      
       
       
     )

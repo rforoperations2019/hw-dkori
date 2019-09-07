@@ -14,6 +14,8 @@ library(ggplot2)
 library(httr)
 library(RCurl)
 library(scales)
+library(DT)
+
 remote_data<-getURL('https://raw.githubusercontent.com/fivethirtyeight/guns-data/master/full_data.csv')
 guns<-read_csv(remote_data)%>%
   filter(!is.na(intent))
@@ -103,7 +105,7 @@ server <- function(input, output) {
    })
    
    output$datatable=renderDataTable(
-     datatable(guns_subset2()%>%
+     DT::datatable(guns_subset2()%>%
                  group_by(series_choice)%>%
                  count(name="value")%>%
                  mutate(value=comma(value)),rownames=FALSE)

@@ -1,12 +1,12 @@
 name: dkori_hw1
-title:
+title: dkori_hw1
 username:
 account: dkori
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1160886
-bundleId: 2394005
+bundleId: 2394774
 url: https://dkori.shinyapps.io/dkori_hw1/
-when: 1567844276.96948
+when: 1567872290.55381
 asMultiple: FALSE
 asStatic: FALSE
