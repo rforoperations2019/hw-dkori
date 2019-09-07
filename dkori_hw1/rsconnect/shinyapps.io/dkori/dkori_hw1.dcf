@@ -5,8 +5,8 @@ account: dkori
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1160886
-bundleId: 2394802
+bundleId: 2394832
 url: https://dkori.shinyapps.io/dkori_hw1/
-when: 1567873055.63593
+when: 1567873956.0096
 asMultiple: FALSE
 asStatic: FALSE

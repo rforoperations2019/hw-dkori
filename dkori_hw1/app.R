@@ -6,6 +6,7 @@
 #
 #    http://shiny.rstudio.com/
 #
+library(DT)
 library(tidyr)
 library(shiny)
 library(readr)
@@ -65,11 +66,12 @@ ui <- fluidPage(
     
     # Show a plot of the generated distribution
     mainPanel(
-      dataTableOutput(outputId="datatable"),
+      
       downloadButton("downloadData","Get this data"),
       plotOutput(outputId = "line_plot"),
       plotOutput("bar_plot"),
-      plotOutput("donut")
+      plotOutput("donut"),
+      dataTableOutput(outputId="datatable")
       
       
       
@@ -104,7 +106,7 @@ server <- function(input, output) {
   })
   
   output$datatable=renderDataTable(
-    datatable(guns_subset2()%>%
+    DT::datatable(guns_subset2()%>%
                 group_by(series_choice)%>%
                 count(name="value")%>%
                 mutate(value=comma(value)),rownames=FALSE)
